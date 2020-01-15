@@ -21,8 +21,9 @@ public class RegisterPage {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get(SETUP);
     }
+
     @Test
-    public void register() throws AWTException {
+    public void register() throws AWTException, InterruptedException {
 
         WebElement iAmNewHere = driver.findElement(By.xpath("//span[@class='ant-typography gm-text ant-typography-contrast']"));
         iAmNewHere.click();
@@ -51,20 +52,48 @@ public class RegisterPage {
         uploadPicture.click();
         driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
-        StringSelection picture = new StringSelection("C:\\Users\\AmadeuszJankowski\\Pictures\02ladna_pani");
+        StringSelection picture = new StringSelection("C:\\Users\\AmadeuszJankowski\\Pictures\\02ladna_pani");
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(picture, null);
 
         Robot robot = new Robot();
+        Thread.sleep(2000);
         robot.keyPress(KeyEvent.VK_ENTER);
+        Thread.sleep(2000);
         robot.keyRelease(KeyEvent.VK_ENTER);
+        Thread.sleep(2000);
         robot.keyPress(KeyEvent.VK_CONTROL);
+        Thread.sleep(2000);
         robot.keyPress(KeyEvent.VK_V);
+        Thread.sleep(2000);
         robot.keyRelease(KeyEvent.VK_V);
+        Thread.sleep(2000);
         robot.keyRelease(KeyEvent.VK_CONTROL);
+        Thread.sleep(2000);
         robot.keyPress(KeyEvent.VK_ENTER);
+        Thread.sleep(2000);
         robot.keyRelease(KeyEvent.VK_ENTER);
+        Thread.sleep(2000);
         robot.delay(50);
         robot.keyRelease(KeyEvent.VK_ENTER);
 
+        WebElement fullName = driver.findElement(By.xpath("//input[@id='PersonalDataForm_FullName']"));
+        fullName.click();
+        fullName.sendKeys("Whatever Guys");
+
+        WebElement gender = driver.findElement(By.id("PersonalDataForm_Gender"));
+        gender.click();
+
+        WebElement selectGender = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/ul/li[1]"));
+        selectGender.click();
+
+        WebElement supportCreator = driver.findElement(By.id("PersonalDataForm_Creator"));
+        supportCreator.click();
+
+        WebElement pickCreator = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/ul/li[2]"));
+        pickCreator.click();
+
+        WebElement PersonalDataNext = driver.findElement(By.xpath("//button[@class='ant-btn ant-btn-contrast ant-btn-lg ant-btn-block']"));
+        PersonalDataNext.click();
     }
 }
+
